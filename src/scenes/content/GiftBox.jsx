@@ -95,7 +95,7 @@ export default function GiftBoxAnnouncement() {
   const [userAnswer, setUserAnswer] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const correctAnswers = ["dítě", "miminko", "dite", "baby", "mimi"];
+  const correctAnswers = ["dítě", "miminko", "dite", "baby", "mimi", "mimino"];
 
   const handleAnswer = () => {
     if (correctAnswers.includes(userAnswer.toLowerCase().trim())) {
