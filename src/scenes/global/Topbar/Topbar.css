@@ -1,0 +1,39 @@
+/* Topbar.css */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  height: 7%;
+  min-height: 70px;
+}
+
+.menu {
+  display: flex;
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-left: 5px;
+  justify-content: space-around;
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.menu a {
+  text-decoration: none;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  line-height: 2.5rem;
+  text-decoration: none;
+}
+
+.menuItem svg {
+  margin-right: 8px;
+  font-size: 1.5rem;
+}
+
+.icon-container {
+  display: flex;
+}
