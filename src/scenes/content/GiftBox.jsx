@@ -198,7 +198,10 @@ export default function GiftBoxAnnouncement() {
           <h2 style={styles.riddleHead}>🎉 Překvapení!</h2>
           <p style={styles.revealText}>Čekáme miminko 👶❤️</p>
           <img src="./imgs/termin.jpg" alt="Miminko" style={styles.revealImg} />
-          <button onClick={handleWarning} style={styles.button}>
+          <button
+            onClick={handleWarning}
+            style={{ ...styles.button, width: "75%" }}
+          >
             Pokračovat
           </button>
         </div>
@@ -267,7 +270,7 @@ const styles = {
   },
   revealBox: {
     position: "absolute",
-    top: "20%",
+    top: "8vh",
     left: "50%",
     transform: "translateX(-50%)",
     textAlign: "center",
@@ -285,7 +288,8 @@ const styles = {
     maxWidth: "100%",
     maxHeight: "550px",
     height: "auto",
-    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.7)",
+    marginBottom: "5px",
   },
   modal: {
     position: "fixed",
