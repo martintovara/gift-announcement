@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Box, Torus } from "@react-three/drei";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
 
@@ -32,6 +32,9 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
     if (screenWidth < 1000) return 0.75;
     return 1;
   }, [screenWidth]);
+
+  //Touch double click workaround
+  const lastTapRef = useRef(0);
 
   return (
     <group
@@ -75,6 +78,16 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
         position={lidSpring.position}
         rotation={lidSpring.rotation}
         onDoubleClick={onDoubleClick}
+        onClick={(e) => {
+          if (e.nativeEvent.pointerType === "touch") {
+            const now = Date.now();
+            const timeSince = now - lastTapRef.current;
+            if (timeSince < 300 && timeSince > 0) {
+              onDoubleClick();
+            }
+            lastTapRef.current = now;
+          }
+        }}
       >
         <Box args={[2, 0.45, 2]} castShadow>
           <meshStandardMaterial color={COLORS.box} />
