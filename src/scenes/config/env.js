@@ -1,3 +1,15 @@
+//File to load .env variables
+
+export const MENU = {
+  RIDDLE: process.env.REACT_APP_MENU_RIDDLE,
+  GUIDE: process.env.REACT_APP_MENU_GUIDE,
+};
+
+export const GUIDE = {
+  HEAD: process.env.REACT_APP_GUIDE_HEAD,
+  TEXT: process.env.REACT_APP_GUIDE_TEXT,
+};
+
 export const COLORS = {
   BOX: process.env.REACT_APP_COLOR_BOX,
   RIBBON: process.env.REACT_APP_COLOR_RIBBON,
@@ -32,6 +44,7 @@ export const RIDDLE = {
     process.env.REACT_APP_RIDDLE_CORRECT_ANSWERS?.split(",") || [],
   HEAD: process.env.REACT_APP_RIDDLE_HEAD,
   TEXT: process.env.REACT_APP_RIDDLE_TEXT,
+  GUESS: process.env.REACT_APP_RIDDLE_GUESS,
   INPUT_PLACEHOLDER: process.env.REACT_APP_RIDDLE_INPUT_PLACEHOLDER,
   SEND_ANSWER: process.env.REACT_APP_RIDDLE_SEND_ANSWER,
 };

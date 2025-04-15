@@ -207,6 +207,12 @@ export default function GiftBoxAnnouncement() {
           >
             {RIDDLE.TEXT}
           </p>
+          <p
+            // @ts-ignore
+            style={styles.riddleText}
+          >
+            {RIDDLE.GUESS}
+          </p>
           <input
             type="text"
             value={userAnswer}
@@ -283,7 +289,7 @@ const styles = {
   },
   riddleText: {
     fontSize: "15pt",
-    width: "40%",
+    width: "80%",
     textAlign: "center",
     margin: "0 auto",
   },

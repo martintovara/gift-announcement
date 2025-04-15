@@ -15,6 +15,7 @@ import {
 import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
 import { Link, useLocation } from "react-router-dom";
+import { MENU } from "../../config/env";
 
 const Topbar = () => {
   const location = useLocation();
@@ -51,7 +52,7 @@ const Topbar = () => {
 
   // Menu items
   const menuItems = [
-    { href: "/", icon: <RedeemOutlined />, label: "Hádanka" },
+    { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
     { href: "/Guide", icon: <RedeemOutlined />, label: "Nápověda" },
   ];
 

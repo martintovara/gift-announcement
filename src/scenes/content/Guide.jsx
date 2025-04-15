@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
+import { GUIDE } from "../config/env";
 
 const Guide = () => {
   const theme = useTheme();
@@ -8,6 +9,8 @@ const Guide = () => {
 
   const borderColor =
     theme.palette.mode === "dark" ? colors.primary[300] : colors.primary[300];
+
+  const guideItems = GUIDE.TEXT.split(";").map((item) => item.trim());
 
   return (
     <Box
@@ -37,7 +40,7 @@ const Guide = () => {
             fontSize: "25pt",
           }}
         >
-          Nápověda
+          {GUIDE.HEAD}
         </Typography>
         <ul
           style={{
@@ -45,21 +48,11 @@ const Guide = () => {
             fontSize: "17pt",
           }}
         >
-          <li style={{ marginBottom: "16px" }}>
-            Vítám vás v této rychlé interaktivní hře, kde na vás čeká jedna
-            záhadná hádanka a překvapení!
-          </li>
-          <li style={{ marginBottom: "16px" }}>
-            Při najetí na stránku se objeví tajemný <strong>"dárek"</strong>.
-            Pokud na něj poklepete dvakrát (double-click), otevře se před vámi{" "}
-            <strong>hádanka</strong>. Po správné odpovědi odhalíte něco opravdu
-            zajímavého!
-          </li>
-          <li style={{ marginBottom: "16px" }}>
-            Nezapomeňte, že to, co se dozvíte, je <strong>tajné</strong>! Nikomu
-            neprozrazujte, co jste zjistili, ať si ostatní mohou užít překvapení
-            stejně jako vy.
-          </li>
+          {guideItems.map((item, index) => (
+            <li key={index} style={{ marginBottom: "16px" }}>
+              {item}
+            </li>
+          ))}
         </ul>
       </Box>
     </Box>
