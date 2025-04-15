@@ -244,7 +244,7 @@ export default function GiftBoxAnnouncement() {
             onClick={handleWarning}
             style={{ ...styles.button, width: "75%" }}
           >
-            Pokračovat
+            {REVEAL.CONTINUE}
           </button>
         </div>
       )}

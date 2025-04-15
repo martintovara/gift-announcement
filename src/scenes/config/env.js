@@ -53,6 +53,7 @@ export const REVEAL = {
   IMAGE_ALT: process.env.REACT_APP_REVEAL_IMAGE_ALT,
   IMAGE_SRC: process.env.REACT_APP_REVEAL_IMAGE_SRC,
   SECRET_TEXT: process.env.REACT_APP_REVEAL_SECRET_TEXT,
+  CONTINUE: process.env.REACT_APP_REVEAL_CONTINUE,
 };
 
 /* console.log({
