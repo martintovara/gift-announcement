@@ -18,6 +18,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const Topbar = () => {
   const location = useLocation();
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
