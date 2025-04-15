@@ -217,7 +217,7 @@ const styles = {
   input: {
     padding: "0.5rem",
     fontSize: "1rem",
-    marginTop: "1rem",
+    marginTop: "1.1rem",
     width: "80%",
   },
   button: {
