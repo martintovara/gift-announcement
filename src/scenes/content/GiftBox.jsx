@@ -1,7 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Box, Torus } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSpring, animated } from "@react-spring/three";
+import { useThree } from "@react-three/fiber";
 
 const COLORS = {
   box: "#F9D8A3",
@@ -22,8 +23,21 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
     config: { tension: 120, friction: 14 },
   });
 
+  const { size } = useThree();
+  const screenWidth = size.width;
+
+  // Adjust scale based on screen width
+  const scaleFactor = useMemo(() => {
+    if (screenWidth < 600) return 0.75;
+    if (screenWidth < 1000) return 0.75;
+    return 1;
+  }, [screenWidth]);
+
   return (
-    <group position={[0, -0.5, 0]}>
+    <group
+      position={[0, -0.5, 0]}
+      scale={[scaleFactor, scaleFactor, scaleFactor]}
+    >
       {/* Hollow box base */}
       <Box args={[2, 0.95, 2]} position={[0, 0.5, 0]} castShadow>
         <meshStandardMaterial color={COLORS.box} />
