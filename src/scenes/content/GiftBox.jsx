@@ -234,7 +234,9 @@ export default function GiftBoxAnnouncement() {
             {process.env.REACT_APP_REVEAL_HEAD_TEXT}
           </h2>
           <p style={styles.revealText}>{process.env.REACT_APP_REVEAL_TEXT}</p>
-          <p style={styles.revealCountdown}>⏳ {timeRemaining}</p>
+          {TARGET_DATE instanceof Date && !isNaN(TARGET_DATE.getTime()) && (
+            <p style={styles.revealCountdown}>⏳ {timeRemaining}</p>
+          )}
           <img
             src={REVEAL.IMAGE_SRC}
             alt={REVEAL.IMAGE_ALT}
@@ -340,7 +342,7 @@ const styles = {
     borderRadius: "1rem",
     marginTop: "0.2rem",
     maxWidth: "100%",
-    maxHeight: "550px",
+    maxHeight: "400px",
     height: "auto",
     boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.7)",
     marginBottom: "5px",

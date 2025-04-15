@@ -31,7 +31,7 @@ export const LABELS = {
   SECONDS: process.env.REACT_APP_LABEL_SECONDS || "s",
 };
 
-export const TARGET_DATE = new Date(process.env.REACT_APP_TARGET_DATE);
+export const TARGET_DATE = new Date(process.env.REACT_APP_TARGET_DATE) || "";
 
 export const MODAL = {
   CLOSE: process.env.REACT_APP_MODAL_BUTTON_TEXT,
