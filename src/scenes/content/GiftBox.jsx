@@ -3,18 +3,16 @@ import { OrbitControls, Box, Torus } from "@react-three/drei";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
-
-const COLORS = {
-  box: "#F9D8A3",
-  ribbon: "#ffffff",
-  bow: "#ffffff",
-  shadowInside: "black",
-  primary: "#0275d8",
-};
-
-const TIMINGS = {
-  showRiddleDelay: 1000,
-};
+import {
+  COLORS,
+  TIMINGS,
+  TIME_FULFILLED,
+  LABELS,
+  TARGET_DATE,
+  MODAL,
+  RIDDLE,
+  REVEAL,
+} from "../config/env";
 
 const GiftBox = ({ isOpen, onDoubleClick }) => {
   const lidSpring = useSpring({
@@ -43,33 +41,33 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
     >
       {/* Hollow box base */}
       <Box args={[2, 0.95, 2]} position={[0, 0.5, 0]} castShadow>
-        <meshStandardMaterial color={COLORS.box} />
+        <meshStandardMaterial color={COLORS.BOX} />
       </Box>
       <Box args={[0.1, 1.5, 2]} position={[-0.95, 0.8, 0]}>
-        <meshStandardMaterial color={COLORS.box} />
+        <meshStandardMaterial color={COLORS.BOX} />
       </Box>
       <Box args={[0.1, 1.5, 2]} position={[0.95, 0.8, 0]}>
-        <meshStandardMaterial color={COLORS.box} />
+        <meshStandardMaterial color={COLORS.BOX} />
       </Box>
       <Box args={[2, 1.5, 0.1]} position={[0, 0.8, -0.95]}>
-        <meshStandardMaterial color={COLORS.box} />
+        <meshStandardMaterial color={COLORS.BOX} />
       </Box>
       <Box args={[2, 1.5, 0.1]} position={[0, 0.8, 0.95]}>
-        <meshStandardMaterial color={COLORS.box} />
+        <meshStandardMaterial color={COLORS.BOX} />
       </Box>
 
       {/* Ribbons on base */}
       <Box args={[0.2, 1.6, 2.01]} position={[0, 0.8, 0]}>
-        <meshStandardMaterial color={COLORS.ribbon} />
+        <meshStandardMaterial color={COLORS.RIBBON} />
       </Box>
       <Box args={[2.1, 0.2, 2.01]} position={[0, 0.8, 0]}>
-        <meshStandardMaterial color={COLORS.ribbon} />
+        <meshStandardMaterial color={COLORS.RIBBON} />
       </Box>
 
       {/* Inside shadow */}
       {isOpen && (
         <Box args={[1.8, 1.3, 1.8]} position={[0, 0.8, 0]}>
-          <meshStandardMaterial color={COLORS.shadowInside} />
+          <meshStandardMaterial color={COLORS.SHADOW_INSIDE} />
         </Box>
       )}
 
@@ -90,7 +88,7 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
         }}
       >
         <Box args={[2, 0.45, 2]} castShadow>
-          <meshStandardMaterial color={COLORS.box} />
+          <meshStandardMaterial color={COLORS.BOX} />
         </Box>
 
         {/* Bow */}
@@ -99,17 +97,17 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
           rotation={[Math.PI / 2, 0, 0]}
           position={[-0.4, 0.3, 0]}
         >
-          <meshStandardMaterial color={COLORS.bow} />
+          <meshStandardMaterial color={COLORS.BOW} />
         </Torus>
         <Torus
           args={[0.3, 0.07, 16, 100]}
           rotation={[Math.PI / 2, 0, 0]}
           position={[0.4, 0.3, 0]}
         >
-          <meshStandardMaterial color={COLORS.bow} />
+          <meshStandardMaterial color={COLORS.BOW} />
         </Torus>
         <Box args={[0.2, 0.2, 0.2]} position={[0, 0.3, 0]}>
-          <meshStandardMaterial color={COLORS.bow} />
+          <meshStandardMaterial color={COLORS.BOW} />
         </Box>
       </animated.group>
     </group>
@@ -125,17 +123,15 @@ export default function GiftBoxAnnouncement() {
   const [modalText, setModalText] = useState("");
   const [timeRemaining, setTimeRemaining] = useState("");
 
-  const correctAnswers = ["dítě", "miminko", "dite", "baby", "mimi", "mimino"];
-
   useEffect(() => {
-    const targetDate = new Date("2025-12-17T00:00:00");
+    const targetDate = new Date(TARGET_DATE);
 
     const updateCountdown = () => {
       const now = new Date();
-      const difference = targetDate - now;
+      const difference = targetDate.getTime() - now.getTime();
 
       if (difference <= 0) {
-        setTimeRemaining("🎉 Už!");
+        setTimeRemaining(TIME_FULFILLED);
         return;
       }
 
@@ -147,7 +143,7 @@ export default function GiftBoxAnnouncement() {
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
       setTimeRemaining(
-        `${days} dní ${hours} hodin ${minutes} minut ${seconds} vteřin`
+        `${days} ${LABELS.DAYS} ${hours} ${LABELS.HOURS} ${minutes} ${LABELS.MINUTES} ${seconds} ${LABELS.SECONDS}`
       );
     };
 
@@ -158,26 +154,23 @@ export default function GiftBoxAnnouncement() {
   }, []);
 
   const handleAnswer = () => {
-    if (correctAnswers.includes(userAnswer.toLowerCase().trim())) {
+    if (RIDDLE.CORRECT_ANSWERS.includes(userAnswer.toLowerCase().trim())) {
       setAnswered(true);
     } else {
-      setModalText("Zkuste hádat znovu 😊");
+      setModalText(MODAL.WRONG_ANSWER);
       setShowModal(true);
     }
   };
 
   const handleWarning = () => {
-    const text =
-      "Nezapomeňte, že to, co jste se dozvěděli, je tajné! Nikomu neprozrazujte, co jste zjistili, ať si ostatní mohou užít překvapení stejně jako vy. Děkujeme :)";
-
-    setModalText(text);
+    setModalText(REVEAL.SECRET_TEXT);
     setShowModal(true);
   };
 
   const handleBoxOpen = () => {
     if (!isOpen) {
       setIsOpen(true);
-      setTimeout(() => setShowRiddle(true), TIMINGS.showRiddleDelay);
+      setTimeout(() => setShowRiddle(true), TIMINGS.SHOW_RIDDLE_DELAY);
     }
   };
 
@@ -201,35 +194,46 @@ export default function GiftBoxAnnouncement() {
 
         <OrbitControls />
       </Canvas>
-
       {/* UI Overlays */}
       {showRiddle && !answered && (
-        <div style={styles.riddleBox}>
-          <h2 style={styles.riddleHead}>🎁 Hádej:</h2>
-          <p style={styles.riddleText}>
-            Jsem malý zázrak, co v bříšku spí, <br />
-            za pár měsíců tu s vámi být smí. <br />
-            Co to je?
+        <div
+          // @ts-ignore
+          style={styles.riddleBox}
+        >
+          <h2 style={styles.riddleHead}>{RIDDLE.HEAD}</h2>
+          <p
+            // @ts-ignore
+            style={styles.riddleText}
+          >
+            {RIDDLE.TEXT}
           </p>
           <input
             type="text"
             value={userAnswer}
             onChange={(e) => setUserAnswer(e.target.value)}
             style={styles.input}
-            placeholder="Vaše odpověď"
+            placeholder={RIDDLE.INPUT_PLACEHOLDER}
           />
           <button onClick={handleAnswer} style={styles.button}>
-            Odpovědět
+            {RIDDLE.SEND_ANSWER}
           </button>
         </div>
       )}
-
       {answered && (
-        <div style={styles.revealBox}>
-          <h2 style={styles.riddleHead}>🎉 Překvapení!</h2>
-          <p style={styles.revealText}>Čekáme miminko 👶❤️</p>
+        <div
+          // @ts-ignore
+          style={styles.revealBox}
+        >
+          <h2 style={styles.revealHead}>
+            {process.env.REACT_APP_REVEAL_HEAD_TEXT}
+          </h2>
+          <p style={styles.revealText}>{process.env.REACT_APP_REVEAL_TEXT}</p>
           <p style={styles.revealCountdown}>⏳ {timeRemaining}</p>
-          <img src="./imgs/termin.jpg" alt="Miminko" style={styles.revealImg} />
+          <img
+            src={REVEAL.IMAGE_SRC}
+            alt={REVEAL.IMAGE_ALT}
+            style={styles.revealImg}
+          />
           <button
             onClick={handleWarning}
             style={{ ...styles.button, width: "75%" }}
@@ -238,19 +242,25 @@ export default function GiftBoxAnnouncement() {
           </button>
         </div>
       )}
-
       {/* Custom modal for incorrect answer or warning */}
       {showModal && (
-        <div style={styles.modal}>
-          <div style={styles.modalContent}>
-            <h3 style={styles.modalHeader}>💡 Tip:</h3>
+        <div
+          // @ts-ignore
+          style={styles.modal}
+        >
+          <div
+            // @ts-ignore
+            style={styles.modalContent}
+          >
+            <h3 style={styles.modalHeader}>{MODAL.HINT}</h3>
             <p style={styles.modalText}>{modalText}</p>
             <button onClick={handleCloseModal} style={styles.modalButton}>
-              Zavřít
+              {MODAL.CLOSE}
             </button>
           </div>
         </div>
       )}
+      c
     </div>
   );
 }
@@ -273,6 +283,9 @@ const styles = {
   },
   riddleText: {
     fontSize: "15pt",
+    width: "40%",
+    textAlign: "center",
+    margin: "0 auto",
   },
   riddleHead: {
     fontSize: "22pt",
@@ -287,13 +300,15 @@ const styles = {
     padding: "0.5rem",
     fontSize: "1rem",
     marginTop: "1.1rem",
-    width: "80%",
+    width: "75%",
+    border: "solid 1px black",
+    borderRadius: "5px",
   },
   button: {
     marginTop: "1rem",
     padding: "0.5rem 1rem",
     fontSize: "1rem",
-    background: COLORS.primary,
+    background: COLORS.PRIMARY,
     color: "white",
     border: "none",
     borderRadius: "0.5rem",
@@ -357,7 +372,7 @@ const styles = {
     marginTop: "1rem",
     padding: "0.5rem 1rem",
     fontSize: "1rem",
-    background: COLORS.primary,
+    background: COLORS.PRIMARY,
     color: "white",
     border: "none",
     borderRadius: "0.5rem",
