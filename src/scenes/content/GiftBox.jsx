@@ -121,6 +121,8 @@ export default function GiftBoxAnnouncement() {
   const [answered, setAnswered] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalText, setModalText] = useState("");
 
   const correctAnswers = ["dítě", "miminko", "dite", "baby", "mimi", "mimino"];
 
@@ -128,8 +130,17 @@ export default function GiftBoxAnnouncement() {
     if (correctAnswers.includes(userAnswer.toLowerCase().trim())) {
       setAnswered(true);
     } else {
-      alert("Zkus to znovu 😉");
+      setModalText("Zkuste hádat znovu 😊");
+      setShowModal(true);
     }
+  };
+
+  const handleWarning = () => {
+    const text =
+      "Nezapomeňte, že to, co jste se dozvěděli, je tajné! Nikomu neprozrazujte, co jste zjistili, ať si ostatní mohou užít překvapení stejně jako vy. Děkujeme :)";
+
+    setModalText(text);
+    setShowModal(true);
   };
 
   const handleBoxOpen = () => {
@@ -137,6 +148,10 @@ export default function GiftBoxAnnouncement() {
       setIsOpen(true);
       setTimeout(() => setShowRiddle(true), TIMINGS.showRiddleDelay);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -183,6 +198,24 @@ export default function GiftBoxAnnouncement() {
           <h2 style={styles.riddleHead}>🎉 Překvapení!</h2>
           <p style={styles.revealText}>Čekáme miminko 👶❤️</p>
           <img src="./imgs/termin.jpg" alt="Miminko" style={styles.revealImg} />
+          <button onClick={handleWarning} style={styles.button}>
+            Pokračovat
+          </button>
+        </div>
+      )}
+
+      {/* Custom modal for incorrect answer or warning */}
+      {showModal && (
+        <div style={styles.modal}>
+          <div style={styles.modalContent}>
+            <h3 style={styles.modalHeader}>💡 Tip:</h3>
+            <p style={styles.modalText}>
+              {modalText} {/* Display dynamic modal text */}
+            </p>
+            <button onClick={handleCloseModal} style={styles.modalButton}>
+              Zavřít
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -253,5 +286,46 @@ const styles = {
     maxHeight: "550px",
     height: "auto",
     boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+  },
+  modal: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(0, 0, 0, 0.7)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 20,
+  },
+  modalContent: {
+    background: "white",
+    padding: "2rem",
+    borderRadius: "1rem",
+    width: "80%",
+    maxWidth: "400px",
+    textAlign: "center",
+  },
+  modalHeader: {
+    fontSize: "20pt",
+    fontWeight: "bold",
+    color: "black",
+  },
+  modalText: {
+    fontSize: "16pt",
+    color: "black",
+  },
+  modalButton: {
+    marginTop: "1rem",
+    padding: "0.5rem 1rem",
+    fontSize: "1rem",
+    background: COLORS.primary,
+    color: "white",
+    border: "none",
+    borderRadius: "0.5rem",
+    cursor: "pointer",
+    width: "60%",
+    height: "40px",
   },
 };
