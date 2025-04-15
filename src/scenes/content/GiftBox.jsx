@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Box, Torus } from "@react-three/drei";
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
 
@@ -123,8 +123,39 @@ export default function GiftBoxAnnouncement() {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
+  const [timeRemaining, setTimeRemaining] = useState("");
 
   const correctAnswers = ["dítě", "miminko", "dite", "baby", "mimi", "mimino"];
+
+  useEffect(() => {
+    const targetDate = new Date("2025-12-17T00:00:00");
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        setTimeRemaining("🎉 Už!");
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      setTimeRemaining(
+        `${days} dní ${hours} hodin ${minutes} minut ${seconds} vteřin`
+      );
+    };
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleAnswer = () => {
     if (correctAnswers.includes(userAnswer.toLowerCase().trim())) {
@@ -197,6 +228,7 @@ export default function GiftBoxAnnouncement() {
         <div style={styles.revealBox}>
           <h2 style={styles.riddleHead}>🎉 Překvapení!</h2>
           <p style={styles.revealText}>Čekáme miminko 👶❤️</p>
+          <p style={styles.revealCountdown}>⏳ {timeRemaining}</p>
           <img src="./imgs/termin.jpg" alt="Miminko" style={styles.revealImg} />
           <button
             onClick={handleWarning}
@@ -212,9 +244,7 @@ export default function GiftBoxAnnouncement() {
         <div style={styles.modal}>
           <div style={styles.modalContent}>
             <h3 style={styles.modalHeader}>💡 Tip:</h3>
-            <p style={styles.modalText}>
-              {modalText} {/* Display dynamic modal text */}
-            </p>
+            <p style={styles.modalText}>{modalText}</p>
             <button onClick={handleCloseModal} style={styles.modalButton}>
               Zavřít
             </button>
@@ -250,6 +280,9 @@ const styles = {
   revealText: {
     fontSize: "20pt",
   },
+  revealCountdown: {
+    fontSize: "18pt",
+  },
   input: {
     padding: "0.5rem",
     fontSize: "1rem",
@@ -284,7 +317,7 @@ const styles = {
   },
   revealImg: {
     borderRadius: "1rem",
-    marginTop: "1rem",
+    marginTop: "0.2rem",
     maxWidth: "100%",
     maxHeight: "550px",
     height: "auto",
