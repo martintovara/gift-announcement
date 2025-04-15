@@ -24,6 +24,7 @@ const Guide = () => {
           borderRadius: "8px",
           padding: "24px",
           maxWidth: "1000px",
+          width: "95%",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
           minHeight: "50%",
         }}
