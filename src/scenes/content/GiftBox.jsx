@@ -157,6 +157,7 @@ export default function GiftBoxAnnouncement() {
             value={userAnswer}
             onChange={(e) => setUserAnswer(e.target.value)}
             style={styles.input}
+            placeholder="Vaše odpověď"
           />
           <button onClick={handleAnswer} style={styles.button}>
             Odpovědět
@@ -167,18 +168,8 @@ export default function GiftBoxAnnouncement() {
       {answered && (
         <div style={styles.revealBox}>
           <h2 style={styles.riddleHead}>🎉 Překvapení!</h2>
-          <p style={styles.riddleText}>Čekáme miminko 👶❤️</p>
-          <img
-            src="./imgs/termin.jpg"
-            alt="Miminko"
-            style={{
-              borderRadius: "1rem",
-              marginTop: "1rem",
-              maxWidth: "50%",
-              height: "auto",
-              boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
-            }}
-          />
+          <p style={styles.revealText}>Čekáme miminko 👶❤️</p>
+          <img src="./imgs/termin.jpg" alt="Miminko" style={styles.revealImg} />
         </div>
       )}
     </div>
@@ -199,12 +190,16 @@ const styles = {
     zIndex: 10,
     color: "black",
     width: "30%",
+    minWidth: "350px",
   },
   riddleText: {
     fontSize: "15pt",
   },
   riddleHead: {
     fontSize: "22pt",
+  },
+  revealText: {
+    fontSize: "20pt",
   },
   input: {
     padding: "0.5rem",
@@ -236,5 +231,14 @@ const styles = {
     boxShadow: "0 0 20px rgba(0,0,0,0.2)",
     zIndex: 10,
     color: "black",
+    minWidth: "350px",
+  },
+  revealImg: {
+    borderRadius: "1rem",
+    marginTop: "1rem",
+    maxWidth: "100%",
+    maxHeight: "550px",
+    height: "auto",
+    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
   },
 };
