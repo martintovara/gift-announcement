@@ -1,15 +1,15 @@
-# 🎁 Baby Announcement 3D Riddle (React App)
+# 🎁 Announcement 3D Riddle (React App)
 
 ## Overview
 
-This is a fun and interactive **React** project designed to announce a baby **for friend of mine** in a unique and memorable way. The app features a **3D model of a gift box** that users can interact with to solve a riddle. Upon solving the riddle, the box opens to **reveal a surprise baby announcement**!
+This is a fun and interactive **React** project designed to announce message in a unique and memorable way. The app features a **3D model of a gift box** that users can interact with to solve a riddle. Upon solving the riddle, the box opens to **reveal a surprise announcement**!
 
 ## Features
 
 - ✨ **React-based frontend** for smooth user experience
 - 🎁 **3D animated gift model** using a 3D rendering library
 - 🧠 **Interactive riddle** that users must solve to unlock the surprise
-- 👶 **Creative reveal** of the baby announcement once the puzzle is solved
+- 👶 **Creative reveal** of the announcement once the puzzle is solved
 - 📱 **Responsive design** for mobile and desktop devices
 
 ## Available Scripts
