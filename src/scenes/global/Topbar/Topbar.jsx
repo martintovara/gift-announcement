@@ -10,13 +10,13 @@ import {
 import {
   LightModeOutlined as LightModeOutlinedIcon,
   DarkModeOutlined as DarkModeOutlinedIcon,
-  RedeemOutlined as RedeemOutlined,
+  RedeemOutlined,
 } from "@mui/icons-material";
-import { ColorModeContext, tokens } from "theme";
+import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
 import { useLocation } from "react-router-dom";
 
-const Topbar = ({}) => {
+const Topbar = () => {
   const location = useLocation();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

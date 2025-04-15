@@ -2,7 +2,7 @@ import { Box, useTheme } from "@mui/material";
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { tokens } from "theme";
+import { tokens } from "../../../theme";
 import configParticles from "./config.json";
 
 const TSParticles = () => {
