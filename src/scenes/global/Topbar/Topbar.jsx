@@ -14,7 +14,7 @@ import {
 } from "@mui/icons-material";
 import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Topbar = () => {
   const location = useLocation();
@@ -51,7 +51,7 @@ const Topbar = () => {
   // Menu items
   const menuItems = [
     { href: "/", icon: <RedeemOutlined />, label: "Hádanka" },
-    { href: "/Napoveda", icon: <RedeemOutlined />, label: "Nápověda" },
+    { href: "/Guide", icon: <RedeemOutlined />, label: "Nápověda" },
   ];
 
   return (
@@ -71,9 +71,9 @@ const Topbar = () => {
       {/* MENU */}
       <Box className="menu">
         {menuItems.map((item) => (
-          <a
+          <Link
             key={item.href}
-            href={item.href}
+            to={item.href}
             style={{
               color: colors.grey[100],
               fontWeight: isActiveRoute(item.href) ? 900 : 400,
@@ -81,6 +81,10 @@ const Topbar = () => {
                 ? `scale(${scaleOnActive})`
                 : "scale(1)",
               transition: "transform 0.2s ease-in-out",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.35rem",
             }}
             className="menuItem"
             onMouseEnter={handleMouseEnter}
@@ -88,7 +92,7 @@ const Topbar = () => {
           >
             {item.icon}
             <Typography variant="inherit">{item.label}</Typography>
-          </a>
+          </Link>
         ))}
       </Box>
       {/* ICONS */}
