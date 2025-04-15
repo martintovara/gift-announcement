@@ -7,6 +7,7 @@ import "@fontsource/source-sans-pro";
 import TSParticles from "./scenes/global/tsParticles/tsParticles";
 import Footer from "./scenes/global/Footer/Footer";
 import GiftBoxAnnouncement from "./scenes/content/GiftBox";
+import Guide from "./scenes/content/Guide";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -21,6 +22,7 @@ function App() {
             <TSParticles key={theme.palette.mode} />
             <Routes>
               <Route path="/" element={<GiftBoxAnnouncement />} />
+              <Route path="/Guide" element={<Guide />} />
             </Routes>
             <Footer />
           </div>
