@@ -50,7 +50,8 @@ const Topbar = ({}) => {
 
   // Menu items
   const menuItems = [
-    { href: "/", icon: <RedeemOutlined />, label: "Dárek s hádankou" },
+    { href: "/", icon: <RedeemOutlined />, label: "Hádanka" },
+    { href: "/Napoveda", icon: <RedeemOutlined />, label: "Nápověda" },
   ];
 
   return (
