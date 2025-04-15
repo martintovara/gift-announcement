@@ -57,9 +57,9 @@ const Guide = () => {
             zajímavého!
           </li>
           <li style={{ marginBottom: "16px" }}>
-            Nezapomeňte, že to, co se ve hře dozvíte, je <strong>tajné</strong>!
-            Nikomu neprozrazujte, co jste zjistili, ať si ostatní hráči mohou
-            užít překvapení stejně jako vy.
+            Nezapomeňte, že to, co se dozvíte, je <strong>tajné</strong>! Nikomu
+            neprozrazujte, co jste zjistili, ať si ostatní mohou užít překvapení
+            stejně jako vy.
           </li>
         </ul>
       </Box>
