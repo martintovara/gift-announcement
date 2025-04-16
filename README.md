@@ -12,6 +12,14 @@ This is a fun and interactive **React** project designed to announce message in 
 - 👶 **Creative reveal** of the announcement once the puzzle is solved
 - 📱 **Responsive design** for mobile and desktop devices
 
+## Configuration
+
+Everything can be configured in the `.env` file. For more details, check the `env.example` file.
+
+## Gallery Images
+
+The images used in the gallery must be in **JPG format** and placed in the `public/my-gallery/` folder. Each image should be named sequentially with numbers (e.g., `1.jpg`, `2.jpg`, `3.jpg`, etc.).
+
 ## Available Scripts
 
 In the project directory, you can run:
