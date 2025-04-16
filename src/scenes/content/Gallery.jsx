@@ -23,12 +23,24 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
     for (let i = 1; i <= imageCount; i++) {
       loadedImages.push(`${folderPath}/${i}.jpg`);
     }
+
     setImages(loadedImages);
   }, [folderPath, imageCount]);
 
   const handleClick = (index) => {
-    setCurrentIndex(index);
-    setOpen(true);
+    const name = index + 1;
+    const imgPath = `${folderPath}/${name}.jpg`;
+
+    const img = new Image();
+    img.onload = () => {
+      setCurrentIndex(index);
+      setOpen(true);
+    };
+    img.onerror = () => {
+      console.warn(`Image not found: ${imgPath}`);
+    };
+
+    img.src = imgPath;
   };
 
   const handleClose = () => {
@@ -59,6 +71,11 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
             src={src}
             alt={`img-${index}`}
             onClick={() => handleClick(index)}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/my-gallery/fallback.jpg";
+              e.target.style.cursor = "not-allowed";
+            }}
             sx={{
               width: "50%",
               aspectRatio: "1 / 1",

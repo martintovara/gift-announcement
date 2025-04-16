@@ -27,3 +27,4 @@ yarn-error.log*
 
 /public/my-gallery/*
 !/public/my-gallery/.gitkeep
+!/public/my-gallery/fallback.jpg
