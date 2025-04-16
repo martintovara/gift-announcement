@@ -12,7 +12,7 @@ import {
   MODAL,
   RIDDLE,
   REVEAL,
-} from "../config/env";
+} from "../../config/env";
 
 const GiftBox = ({ isOpen, onDoubleClick }) => {
   const lidSpring = useSpring({

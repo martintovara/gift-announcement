@@ -15,7 +15,7 @@ import {
 import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
 import { Link, useLocation } from "react-router-dom";
-import { MENU } from "../../config/env";
+import { MENU } from "../../../config/env";
 
 const Topbar = () => {
   const location = useLocation();
@@ -67,6 +67,7 @@ const Topbar = () => {
         }`,
         backgroundColor: theme.palette.background.default,
         boxShadow: `0 0.225rem 0.25rem ${shadowColor}`,
+        // @ts-ignore
         fontSize: theme.typography.menu?.fontSize || "1rem",
       }}
     >

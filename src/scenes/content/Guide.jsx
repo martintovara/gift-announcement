@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { GUIDE } from "../config/env";
+import { GUIDE } from "../../config/env";
 
 const Guide = () => {
   const theme = useTheme();
