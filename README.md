@@ -11,6 +11,7 @@ This is a fun and interactive **React** project designed to announce message in 
 - 🧠 **Interactive riddle** that users must solve to unlock the surprise
 - 👶 **Creative reveal** of the announcement once the puzzle is solved
 - 📱 **Responsive design** for mobile and desktop devices
+- 💾 **Progress saved in LocalStorage** for a seamless experience across sessions
 
 ## Configuration
 
