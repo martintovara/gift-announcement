@@ -192,7 +192,14 @@ export default function GiftBoxAnnouncement() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        overflow: "hidden",
+      }}
+    >
       <Canvas shadows camera={{ position: [4, 4, 6], fov: 35 }}>
         <ambientLight intensity={0.4} />
         <directionalLight
