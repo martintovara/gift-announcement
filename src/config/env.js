@@ -58,4 +58,5 @@ export const REVEAL = {
 
 export const GALLERY = {
   REDIRECT: process.env.REACT_APP_REDIRECT_TO_GALLERY,
+  NB_IMGS: process.env.REACT_APP_NB_GALLERY_IMGS,
 };

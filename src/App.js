@@ -9,6 +9,7 @@ import Footer from "./scenes/global/Footer/Footer";
 import GiftBoxAnnouncement from "./scenes/content/GiftBox";
 import Guide from "./scenes/content/Guide";
 import Gallery from "scenes/content/Gallery";
+import { GALLERY } from "../src/config/env";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -27,7 +28,12 @@ function App() {
               <Route path="/Guide" element={<Guide />} />
               <Route
                 path="/Gallery"
-                element={<Gallery folderPath="/my-gallery" imageCount={3} />}
+                element={
+                  <Gallery
+                    folderPath="/my-gallery"
+                    imageCount={parseInt(GALLERY.NB_IMGS)}
+                  />
+                }
               />
             </Routes>
             <Footer />
