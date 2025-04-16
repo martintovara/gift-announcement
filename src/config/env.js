@@ -56,13 +56,6 @@ export const REVEAL = {
   CONTINUE: process.env.REACT_APP_REVEAL_CONTINUE,
 };
 
-/* console.log({
-  COLORS,
-  TIMINGS,
-  TIME_FULFILLED,
-  LABELS,
-  TARGET_DATE,
-  MODAL,
-  RIDDLE,
-  REVEAL,
-}); */
+export const GALLERY = {
+  REDIRECT: process.env.REACT_APP_REDIRECT_TO_GALLERY,
+};

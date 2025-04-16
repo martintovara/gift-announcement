@@ -8,6 +8,7 @@ import TSParticles from "./scenes/global/tsParticles/tsParticles";
 import Footer from "./scenes/global/Footer/Footer";
 import GiftBoxAnnouncement from "./scenes/content/GiftBox";
 import Guide from "./scenes/content/Guide";
+import Gallery from "scenes/content/Gallery";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -21,8 +22,13 @@ function App() {
             <Topbar />
             <TSParticles key={theme.palette.mode} />
             <Routes>
+              <Route path="*" element={<GiftBoxAnnouncement />} />
               <Route path="/" element={<GiftBoxAnnouncement />} />
               <Route path="/Guide" element={<Guide />} />
+              <Route
+                path="/Gallery"
+                element={<Gallery folderPath="/my-gallery" imageCount={3} />}
+              />
             </Routes>
             <Footer />
           </div>

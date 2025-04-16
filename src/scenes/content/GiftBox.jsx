@@ -3,6 +3,7 @@ import { OrbitControls, Box, Torus } from "@react-three/drei";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
+import { useNavigate } from "react-router-dom";
 import {
   COLORS,
   TIMINGS,
@@ -12,6 +13,7 @@ import {
   MODAL,
   RIDDLE,
   REVEAL,
+  GALLERY,
 } from "../../config/env";
 
 const GiftBox = ({ isOpen, onDoubleClick }) => {
@@ -167,6 +169,15 @@ export default function GiftBoxAnnouncement() {
     setShowModal(true);
   };
 
+  const handleWarningAndGallery = () => {
+    setModalText(REVEAL.SECRET_TEXT);
+    setShowModal(true);
+
+    setTimeout(() => {
+      navigate("/Gallery");
+    }, 5500);
+  };
+
   const handleBoxOpen = () => {
     if (!isOpen) {
       setIsOpen(true);
@@ -177,6 +188,8 @@ export default function GiftBoxAnnouncement() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
@@ -243,7 +256,13 @@ export default function GiftBoxAnnouncement() {
             style={styles.revealImg}
           />
           <button
-            onClick={handleWarning}
+            onClick={() => {
+              if (GALLERY.REDIRECT) {
+                handleWarningAndGallery();
+              } else {
+                handleWarning();
+              }
+            }}
             style={{ ...styles.button, width: "75%" }}
           >
             {REVEAL.CONTINUE}
