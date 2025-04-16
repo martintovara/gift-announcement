@@ -173,6 +173,8 @@ export default function GiftBoxAnnouncement() {
     setModalText(REVEAL.SECRET_TEXT);
     setShowModal(true);
 
+    localStorage.setItem("allowAccessGallery", JSON.stringify(true));
+
     setTimeout(() => {
       navigate("/Gallery");
     }, 5500);

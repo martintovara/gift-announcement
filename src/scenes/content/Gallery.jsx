@@ -10,8 +10,24 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import { GALLERY } from "config/env";
 
 const Gallery = ({ folderPath, imageCount = 10 }) => {
+  const navigate = useNavigate();
+
+  //Check access to gallery
+  useEffect(() => {
+    const allowAccessGallery = JSON.parse(
+      localStorage.getItem("allowAccessGallery")
+    );
+
+    if (!allowAccessGallery) {
+      alert(GALLERY.NO_PERMISSIONS);
+      navigate("/");
+    }
+  }, [navigate]);
+
   const [images, setImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
