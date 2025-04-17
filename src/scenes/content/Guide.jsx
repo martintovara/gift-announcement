@@ -45,7 +45,7 @@ const Guide = () => {
         <ul
           style={{
             paddingLeft: "20px",
-            fontSize: "17pt",
+            fontSize: "calc(12px + 0.75vw)",
           }}
         >
           {guideItems.map((item, index) => (
