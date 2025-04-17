@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import {
   Box,
   IconButton,
@@ -15,7 +15,7 @@ import {
 import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
 import { Link, useLocation } from "react-router-dom";
-import { MENU } from "../../../config/env";
+import { MENU, TITLES } from "../../../config/env";
 
 const Topbar = () => {
   const location = useLocation();
@@ -51,10 +51,26 @@ const Topbar = () => {
   };
 
   // Menu items
-  const menuItems = [
-    { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
-    { href: "/Guide", icon: <RedeemOutlined />, label: "Nápověda" },
-  ];
+  const menuItems = useMemo(
+    () => [
+      { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
+      { href: "/Guide", icon: <RedeemOutlined />, label: "Nápověda" },
+    ],
+    []
+  );
+
+  // Title update
+  useEffect(() => {
+    const currentMenuItem = menuItems.find(
+      (item) => item.href === location.pathname
+    );
+    document.title = currentMenuItem ? currentMenuItem.label : "Gift";
+
+    //Exception for gallery
+    if (location.pathname.slice(1) === "Gallery" && TITLES.GALLERY) {
+      document.title = TITLES.GALLERY;
+    }
+  }, [location, menuItems]);
 
   return (
     <Box

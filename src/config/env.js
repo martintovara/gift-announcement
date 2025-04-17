@@ -1,5 +1,9 @@
 //File to load .env variables
 
+export const TITLES = {
+  GALLERY: process.env.REACT_APP_GALLERY_TITLE,
+};
+
 export const MENU = {
   RIDDLE: process.env.REACT_APP_MENU_RIDDLE,
   GUIDE: process.env.REACT_APP_MENU_GUIDE,
