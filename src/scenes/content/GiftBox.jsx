@@ -124,6 +124,7 @@ export default function GiftBoxAnnouncement() {
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
   const [timeRemaining, setTimeRemaining] = useState("");
+  const [modalSource, setModalSource] = useState(null);
 
   useEffect(() => {
     const targetDate = new Date(TARGET_DATE);
@@ -175,6 +176,8 @@ export default function GiftBoxAnnouncement() {
 
     localStorage.setItem("allowAccessGallery", JSON.stringify(true));
 
+    setModalSource("galleryRedirect");
+
     setTimeout(() => {
       navigate("/Gallery");
     }, 5500);
@@ -188,7 +191,12 @@ export default function GiftBoxAnnouncement() {
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    if (modalSource === "galleryRedirect") {
+      setModalSource(null);
+      setTimeout(() => navigate("/Gallery"), 250);
+    } else {
+      setModalSource(null);
+    }
   };
 
   const navigate = useNavigate();
