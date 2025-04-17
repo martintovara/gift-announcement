@@ -52,7 +52,7 @@ export const RIDDLE = {
 export const REVEAL = {
   IMAGE_ALT: process.env.REACT_APP_REVEAL_IMAGE_ALT,
   IMAGE_SRC: process.env.REACT_APP_REVEAL_IMAGE_SRC,
-  SECRET_TEXT: process.env.REACT_APP_REVEAL_SECRET_TEXT,
+  SECRET_TEXT: process.env.REACT_APP_REVEAL_SECRET_TEXT.replace(/\\n/g, "\n"),
   CONTINUE: process.env.REACT_APP_REVEAL_CONTINUE,
 };
 

@@ -177,10 +177,6 @@ export default function GiftBoxAnnouncement() {
     localStorage.setItem("allowAccessGallery", JSON.stringify(true));
 
     setModalSource("galleryRedirect");
-
-    setTimeout(() => {
-      navigate("/Gallery");
-    }, 5500);
   };
 
   const handleBoxOpen = () => {
@@ -195,6 +191,7 @@ export default function GiftBoxAnnouncement() {
       setModalSource(null);
       setTimeout(() => navigate("/Gallery"), 250);
     } else {
+      setShowModal(false);
       setModalSource(null);
     }
   };
@@ -297,7 +294,9 @@ export default function GiftBoxAnnouncement() {
             style={styles.modalContent}
           >
             <h3 style={styles.modalHeader}>{MODAL.HINT}</h3>
-            <p style={styles.modalText}>{modalText}</p>
+            <p style={{ ...styles.modalText, whiteSpace: "pre-line" }}>
+              {modalText}
+            </p>
             <button onClick={handleCloseModal} style={styles.modalButton}>
               {MODAL.CLOSE}
             </button>
@@ -400,13 +399,14 @@ const styles = {
     padding: "2rem",
     borderRadius: "1rem",
     width: "80%",
-    maxWidth: "400px",
+    maxWidth: "450px",
     textAlign: "center",
   },
   modalHeader: {
     fontSize: "20pt",
     fontWeight: "bold",
     color: "black",
+    textAlign: "center",
   },
   modalText: {
     fontSize: "16pt",
