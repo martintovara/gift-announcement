@@ -114,11 +114,13 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
         onClose={handleClose}
         fullWidth
         maxWidth={false}
-        PaperProps={{
-          sx: {
-            backgroundColor: "black",
-            height: "100%",
-            width: "100%",
+        slotProps={{
+          paper: {
+            sx: {
+              backgroundColor: "black",
+              height: "100%",
+              width: "100%",
+            },
           },
         }}
       >
