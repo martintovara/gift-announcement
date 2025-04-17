@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Dialog,
@@ -11,7 +11,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { GALLERY } from "config/env";
+import { GALLERY } from "../../config/env";
 
 const Gallery = ({ folderPath, imageCount = 10 }) => {
   const navigate = useNavigate();
