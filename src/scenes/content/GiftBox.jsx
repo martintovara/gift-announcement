@@ -17,29 +17,65 @@ import {
 } from "../../config/env";
 
 const GiftBox = ({ isOpen, onDoubleClick }) => {
-  const lidSpring = useSpring({
-    rotation: isOpen ? [-Math.PI / 2, 0, 0] : [0, 0, 0],
-    position: isOpen ? [0, 1.6, -1] : [0, 1.3, 0],
-    config: { tension: 120, friction: 14 },
-  });
-
+  const [isTrembling, setIsTrembling] = useState(false);
+  const lastTapRef = useRef(0);
   const { size } = useThree();
   const screenWidth = size.width;
 
-  // Adjust scale based on screen width
   const scaleFactor = useMemo(() => {
     if (screenWidth < 600) return 0.75;
     if (screenWidth < 1000) return 0.75;
     return 1;
   }, [screenWidth]);
 
-  //Touch double click workaround
-  const lastTapRef = useRef(0);
+  // Trembling animation
+  const trembleSpring = useSpring({
+    rotation:
+      isTrembling && !isOpen
+        ? [
+            (Math.random() - 0.5) * 0.1,
+            (Math.random() - 0.5) * 0.1,
+            (Math.random() - 0.5) * 0.1,
+          ]
+        : [0, 0, 0],
+    config: { tension: 130, friction: 1 },
+    onRest: () => {
+      if (isTrembling) setIsTrembling(false);
+    },
+  });
+
+  const startTremble = () => {
+    setIsTrembling(true);
+    setTimeout(() => {
+      setIsTrembling(false);
+    }, 100);
+  };
+
+  // Lid animation
+  const lidSpring = useSpring({
+    rotation: isOpen ? [-Math.PI / 2, 0, 0] : [0, 0, 0],
+    position: isOpen ? [0, 1.6, -1] : [0, 1.3, 0],
+    config: { tension: 120, friction: 14 },
+  });
+
+  const handleClick = (e) => {
+    startTremble();
+
+    if (e.nativeEvent.pointerType === "touch") {
+      const now = Date.now();
+      const timeSince = now - lastTapRef.current;
+      if (timeSince < 300 && timeSince > 0) {
+        onDoubleClick();
+      }
+      lastTapRef.current = now;
+    }
+  };
 
   return (
-    <group
+    <animated.group
       position={[0, -0.5, 0]}
       scale={[scaleFactor, scaleFactor, scaleFactor]}
+      rotation={trembleSpring.rotation}
     >
       {/* Hollow box base */}
       <Box args={[2, 0.95, 2]} position={[0, 0.5, 0]} castShadow>
@@ -66,28 +102,33 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
         <meshStandardMaterial color={COLORS.RIBBON} />
       </Box>
 
-      {/* Inside shadow */}
+      {/* Inside shadow and resize sides */}
       {isOpen && (
-        <Box args={[1.8, 1.3, 1.8]} position={[0, 0.8, 0]}>
-          <meshStandardMaterial color={COLORS.SHADOW_INSIDE} />
-        </Box>
+        <>
+          <Box args={[1.8, 1.3, 1.8]} position={[0, 0.97, 0]}>
+            <meshStandardMaterial color={COLORS.SHADOW_INSIDE} />
+          </Box>
+
+          <Box args={[0.1, 1.5, 2]} position={[-0.95, 0.89, 0]}>
+            <meshStandardMaterial color={COLORS.BOX} />
+          </Box>
+
+          <Box args={[0.1, 1.5, 2]} position={[0.95, 0.89, 0]}>
+            <meshStandardMaterial color={COLORS.BOX} />
+          </Box>
+
+          <Box args={[2, 1.5, 0.1]} position={[0, 0.89, 0.95]}>
+            <meshStandardMaterial color={COLORS.BOX} />
+          </Box>
+        </>
       )}
 
       {/* Lid with bow */}
       <animated.group
         position={lidSpring.position}
         rotation={lidSpring.rotation}
+        onClick={handleClick}
         onDoubleClick={onDoubleClick}
-        onClick={(e) => {
-          if (e.nativeEvent.pointerType === "touch") {
-            const now = Date.now();
-            const timeSince = now - lastTapRef.current;
-            if (timeSince < 300 && timeSince > 0) {
-              onDoubleClick();
-            }
-            lastTapRef.current = now;
-          }
-        }}
       >
         <Box args={[2, 0.45, 2]} castShadow>
           <meshStandardMaterial color={COLORS.BOX} />
@@ -112,7 +153,7 @@ const GiftBox = ({ isOpen, onDoubleClick }) => {
           <meshStandardMaterial color={COLORS.BOW} />
         </Box>
       </animated.group>
-    </group>
+    </animated.group>
   );
 };
 
