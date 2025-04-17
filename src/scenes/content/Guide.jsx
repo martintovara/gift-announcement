@@ -37,7 +37,7 @@ const Guide = () => {
             textAlign: "center",
             mb: 4,
             fontWeight: "bold",
-            fontSize: "25pt",
+            fontSize: "27pt",
           }}
         >
           {GUIDE.HEAD}
@@ -45,7 +45,7 @@ const Guide = () => {
         <ul
           style={{
             paddingLeft: "20px",
-            fontSize: "calc(12px + 0.75vw)",
+            fontSize: "calc(12px + 0.55vw)",
           }}
         >
           {guideItems.map((item, index) => (
