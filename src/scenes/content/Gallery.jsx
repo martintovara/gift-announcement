@@ -71,6 +71,25 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!open) return;
+
+      if (e.key === "ArrowLeft") {
+        goToPrev();
+      } else if (e.key === "ArrowRight") {
+        goToNext();
+      } else if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, goToPrev, goToNext]);
+
   return (
     <>
       <Box
