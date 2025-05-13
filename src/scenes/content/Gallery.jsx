@@ -202,7 +202,7 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
           }}
         >
           <IconButton onClick={handleClose} color="inherit">
-            <CloseIcon />
+            <CloseIcon sx={{ color: "white" }} />
           </IconButton>
         </Box>
 
