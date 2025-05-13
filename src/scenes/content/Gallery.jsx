@@ -139,6 +139,7 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
                 component="img"
                 src={src}
                 alt={`img-${index}`}
+                draggable={false}
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "/my-gallery/fallback.jpg";
