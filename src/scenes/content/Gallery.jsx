@@ -43,6 +43,17 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
     setImages(loadedImages);
   }, [folderPath, imageCount]);
 
+  useEffect(() => {
+    const loadedImages = [];
+    for (let i = 1; i <= imageCount; i++) {
+      loadedImages.push(`${folderPath}/${i}.jpg`);
+    }
+
+    setImages(loadedImages);
+  }, [folderPath, imageCount]);
+
+  const ARR_IMGS_DESCRIPTIONS = GALLERY.IMGS_DESCRIPTIONS.split(",");
+
   const handleClick = (index) => {
     const name = index + 1;
     const imgPath = `${folderPath}/${name}.jpg`;
@@ -102,28 +113,67 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
         {images.map((src, index) => (
           <Box
             key={index}
-            component="img"
-            src={src}
-            alt={`img-${index}`}
-            onClick={() => handleClick(index)}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "/my-gallery/fallback.jpg";
-              e.target.style.cursor = "not-allowed";
-            }}
             sx={{
-              width: "50%",
-              aspectRatio: "1 / 1",
-              objectFit: "cover",
-              cursor: "pointer",
-              borderRadius: 1,
+              display: "flex",
+              justifyContent: "center",
               mt: 7,
               ml: 5,
-              border: "solid 10px #f2f2f2",
-              borderBottom: "solid 3vh #f2f2f2",
-              boxShadow: "0 0 20px rgba(0,0,0,0.4)",
             }}
-          />
+          >
+            <Box
+              sx={{
+                position: "relative",
+                width: "50%",
+                aspectRatio: "1 / 1",
+                borderRadius: 1,
+                overflow: "hidden",
+                border: "solid 10px #f2f2f2",
+                boxShadow: "0 0 20px rgba(0,0,0,0.4)",
+                cursor: "pointer",
+                minHeight: "120px",
+                minWidth: "120px",
+              }}
+              onClick={() => handleClick(index)}
+            >
+              <Box
+                component="img"
+                src={src}
+                alt={`img-${index}`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/my-gallery/fallback.jpg";
+                  e.target.style.cursor = "not-allowed";
+                }}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  width: "100%",
+                  px: 1,
+                  py: 0.55,
+                  backgroundColor: "rgba(242, 242, 242, 0.87)",
+                  textAlign: "center",
+                  fontSize: "clamp(0.7rem, 1.5vw, 1rem)",
+                  color: "#444",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: {
+                    xs: "normal",
+                    sm: "nowrap",
+                  },
+                }}
+              >
+                {ARR_IMGS_DESCRIPTIONS[index] || ""}
+              </Box>
+            </Box>
+          </Box>
         ))}
       </Box>
 
