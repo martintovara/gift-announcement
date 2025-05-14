@@ -260,7 +260,7 @@ export default function GiftBoxAnnouncement() {
 
         <GiftBox isOpen={isOpen} onDoubleClick={handleBoxOpen} />
 
-        <OrbitControls />
+        <OrbitControls enableZoom={false} />
       </Canvas>
       {/* UI Overlays */}
       {showRiddle && !answered && (
