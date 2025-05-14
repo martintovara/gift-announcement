@@ -25,7 +25,10 @@ const Footer = () => {
         fontSize: theme.typography.footer.fontSize,
       }}
     >
-      <Typography variant="inherit" style={{ color: colors.grey[100] }}>
+      <Typography
+        variant="inherit"
+        style={{ color: colors.grey[100], userSelect: "none" }}
+      >
         Martin Tovara © 2025
       </Typography>
     </Box>
