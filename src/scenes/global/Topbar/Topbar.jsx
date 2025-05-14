@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   IconButton,
@@ -12,11 +12,12 @@ import {
   DarkModeOutlined as DarkModeOutlinedIcon,
   RedeemOutlined,
   HelpCenterOutlined,
+  CollectionsOutlined,
 } from "@mui/icons-material";
 import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
 import { Link, useLocation } from "react-router-dom";
-import { MENU, TITLES } from "../../../config/env";
+import { GALLERY, MENU, TITLES } from "../../../config/env";
 
 const Topbar = () => {
   const location = useLocation();
@@ -51,14 +52,37 @@ const Topbar = () => {
     }
   };
 
+  const [allowAccessGallery, setAllowAccessGallery] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("allowAccessGallery")) || false;
+    } catch {
+      return false;
+    }
+  });
+
+  // Update allowAccessGallery when location changes to /Gallery
+  useEffect(() => {
+    if (location.pathname === "/Gallery") {
+      const fromStorage = JSON.parse(
+        localStorage.getItem("allowAccessGallery") || "false"
+      );
+      setAllowAccessGallery(fromStorage);
+    }
+  }, [location.pathname]);
+
   // Menu items
-  const menuItems = useMemo(
-    () => [
-      { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
-      { href: "/Guide", icon: <HelpCenterOutlined />, label: "Nápověda" },
-    ],
-    []
-  );
+  const menuItems = [
+    { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
+    { href: "/Guide", icon: <HelpCenterOutlined />, label: MENU.GUIDE },
+  ];
+
+  if (allowAccessGallery && GALLERY.REDIRECT) {
+    menuItems.push({
+      href: "/Gallery",
+      icon: <CollectionsOutlined />,
+      label: MENU.GALLERY,
+    });
+  }
 
   // Title update
   useEffect(() => {
@@ -84,7 +108,6 @@ const Topbar = () => {
         }`,
         backgroundColor: theme.palette.background.default,
         boxShadow: `0 0.225rem 0.25rem ${shadowColor}`,
-        // @ts-ignore
         fontSize: theme.typography.menu?.fontSize || "1rem",
       }}
     >
@@ -102,16 +125,31 @@ const Topbar = () => {
                 : "scale(1)",
               transition: "transform 0.2s ease-in-out",
               textDecoration: "none",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.35rem",
             }}
             className="menuItem"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={(e) => handleMouseLeave(e, item.href)}
           >
-            {item.icon}
-            <Typography variant="inherit">{item.label}</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.35rem",
+                ...(allowAccessGallery && GALLERY.REDIRECT
+                  ? {
+                      "@media (max-width: 550px)": {
+                        gap: 0,
+                        ".MuiTypography-root": {
+                          display: "none",
+                        },
+                      },
+                    }
+                  : {}),
+              }}
+            >
+              {item.icon}
+              <Typography variant="inherit">{item.label}</Typography>
+            </Box>
           </Link>
         ))}
       </Box>

@@ -7,6 +7,7 @@ export const TITLES = {
 export const MENU = {
   RIDDLE: process.env.REACT_APP_MENU_RIDDLE,
   GUIDE: process.env.REACT_APP_MENU_GUIDE,
+  GALLERY: process.env.REACT_APP_MENU_GALLERY,
 };
 
 export const GUIDE = {
