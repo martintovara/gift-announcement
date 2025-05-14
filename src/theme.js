@@ -197,6 +197,10 @@ export const ColorModeContext = createContext({
 export const useMode = () => {
   const getInitialMode = () => {
     const savedMode = localStorage.getItem("themeMode");
+    if (!savedMode) {
+      return "dark";
+    }
+
     if (savedMode === "light" || savedMode === "dark") {
       return savedMode;
     }
