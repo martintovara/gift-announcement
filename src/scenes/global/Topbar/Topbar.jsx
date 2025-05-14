@@ -11,6 +11,7 @@ import {
   LightModeOutlined as LightModeOutlinedIcon,
   DarkModeOutlined as DarkModeOutlinedIcon,
   RedeemOutlined,
+  HelpCenterOutlined,
 } from "@mui/icons-material";
 import { ColorModeContext, tokens } from "../../../theme";
 import "./Topbar.css";
@@ -54,7 +55,7 @@ const Topbar = () => {
   const menuItems = useMemo(
     () => [
       { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
-      { href: "/Guide", icon: <RedeemOutlined />, label: "Nápověda" },
+      { href: "/Guide", icon: <HelpCenterOutlined />, label: "Nápověda" },
     ],
     []
   );
