@@ -305,11 +305,18 @@ export default function GiftBoxAnnouncement() {
           {TARGET_DATE instanceof Date && !isNaN(TARGET_DATE.getTime()) && (
             <p style={styles.revealCountdown}>⏳ {timeRemaining}</p>
           )}
-          <img
-            src={REVEAL.IMAGE_SRC}
-            alt={REVEAL.IMAGE_ALT}
-            style={styles.revealImg}
-          />
+          {REVEAL.IMAGE_SRC && (
+            <img
+              src={REVEAL.IMAGE_SRC}
+              alt={REVEAL.IMAGE_ALT}
+              style={styles.revealImg}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/my-gallery/fallback.jpg";
+                e.target.style.cursor = "not-allowed";
+              }}
+            />
+          )}
           <button
             onClick={() => {
               if (GALLERY.REDIRECT) {
