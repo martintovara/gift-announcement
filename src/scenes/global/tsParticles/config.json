@@ -4,14 +4,16 @@
   "background": {},
   "particles": {
     "number": {
-      "value": 60,
+      "value": 100,
       "density": {
         "enable": true,
         "area": 1000
       }
     },
     "color": { "value": "" },
-    "shape": { "type": "circle" },
+    "shape": {
+      "type": ["circle", "line", "edge", "triangle", "polygon", "star"]
+    },
     "opacity": {
       "value": 0.5,
       "random": true
@@ -23,6 +25,8 @@
       "enable": true,
       "speed": 0.5,
       "direction": "none",
+      "random": true,
+      "straight": false,
       "outModes": { "default": "bounce" }
     }
   },
@@ -33,7 +37,7 @@
       "resize": true
     },
     "modes": {
-      "repulse": { "distance": 200 },
+      "repulse": { "distance": 100 },
       "push": { "quantity": 4 }
     }
   }
