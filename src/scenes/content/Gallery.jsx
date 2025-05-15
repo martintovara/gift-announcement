@@ -241,6 +241,11 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
               maxHeight: "100%",
               objectFit: "contain",
             }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/my-gallery/fallback.jpg";
+              e.target.style.cursor = "not-allowed";
+            }}
           />
 
           {/* Right Arrow */}
