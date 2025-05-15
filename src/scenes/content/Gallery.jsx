@@ -116,8 +116,10 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              mt: 7,
+              mt: 5,
               ml: 5,
+              mr: 5,
+              mb: 5,
             }}
           >
             <Box
