@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import {
   Box,
   IconButton,
@@ -71,27 +71,30 @@ const Topbar = () => {
   }, [location.pathname]);
 
   // Menu items
-  const menuItems = [
-    { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
-    { href: "/Guide", icon: <HelpCenterOutlined />, label: MENU.GUIDE },
-  ];
+  const menuItems = useMemo(() => {
+    const items = [
+      { href: "/", icon: <RedeemOutlined />, label: MENU.RIDDLE },
+      { href: "/Guide", icon: <HelpCenterOutlined />, label: MENU.GUIDE },
+    ];
 
-  if (allowAccessGallery && GALLERY.REDIRECT) {
-    menuItems.push({
-      href: "/Gallery",
-      icon: <CollectionsOutlined />,
-      label: MENU.GALLERY,
-    });
-  }
+    if (allowAccessGallery && GALLERY.REDIRECT) {
+      items.push({
+        href: "/Gallery",
+        icon: <CollectionsOutlined />,
+        label: MENU.GALLERY,
+      });
+    }
 
-  // Title update
+    return items;
+  }, [allowAccessGallery]);
+
   useEffect(() => {
     const currentMenuItem = menuItems.find(
       (item) => item.href === location.pathname
     );
     document.title = currentMenuItem ? currentMenuItem.label : "Gift";
 
-    //Exception for gallery
+    // Exception for gallery
     if (location.pathname.slice(1) === "Gallery" && TITLES.GALLERY) {
       document.title = TITLES.GALLERY;
     }
