@@ -134,6 +134,13 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
                 cursor: "pointer",
                 minHeight: "120px",
                 minWidth: "120px",
+                backgroundColor: "#f2f2f2",
+                transition: "transform 0.4s ease-in-out",
+                transformOrigin: "center center",
+                willChange: "transform",
+                "&:hover": {
+                  transform: "scale(1.07)",
+                },
               }}
               onClick={() => handleClick(index)}
             >
@@ -152,6 +159,7 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
                   height: "100%",
                   objectFit: "cover",
                   display: "block",
+                  borderRadius: 1,
                 }}
               />
               <Box
@@ -161,7 +169,7 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
                   width: "100%",
                   px: 1,
                   py: 0.55,
-                  backgroundColor: "rgba(242, 242, 242, 0.87)",
+                  backgroundColor: "rgba(242, 242, 242, 0.9)",
                   textAlign: "center",
                   fontSize: "clamp(0.7rem, 1.5vw, 1rem)",
                   color: "#444",
