@@ -275,6 +275,7 @@ export default function GiftBoxAnnouncement() {
           >
             {RIDDLE.TEXT}
           </p>
+          <p></p>
           <p
             // @ts-ignore
             style={styles.riddleText}
