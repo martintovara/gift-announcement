@@ -106,7 +106,7 @@ const Gallery = ({ folderPath, imageCount = 10 }) => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))",
           gap: 2,
         }}
       >
