@@ -421,6 +421,8 @@ const styles = {
     zIndex: 10,
     color: "black",
     minWidth: "350px",
+    maxHeight: "85vh",
+    overflowY: "auto",
   },
   revealImg: {
     borderRadius: "1rem",
