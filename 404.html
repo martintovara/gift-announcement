@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // When GitHub Pages 404s, redirect back to index.html preserving the path
+      var pathname = window.location.pathname;
+      var repoBase = "/gift-announcement";
+
+      // If the path does not start with the repo base, add it
+      if (!pathname.startsWith(repoBase)) {
+        pathname = repoBase + pathname;
+      }
+
+      // Redirect to the index.html with the original path as part of URL (so React Router can read it)
+      window.location.replace(
+        repoBase + "/index.html" + window.location.search + window.location.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
